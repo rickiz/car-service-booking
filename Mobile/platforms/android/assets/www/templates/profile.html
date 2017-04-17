@@ -1,0 +1,25 @@
+﻿<ion-view title="Personal Profile" cache-view="false">
+    <ion-content class="has-header" padding="true" overflow-scroll="false">
+        <form id="personalProfile-form14" class="list">
+            <ion-item id="personalProfile-list-item13">
+                Name:
+                <span class="item-note">{{ vm.name }}</span>
+            </ion-item>
+            <ion-item id="personalProfile-list-item14">
+                Email:
+                <span class="item-note">{{ vm.email }}</span>
+            </ion-item>
+            <label class="item item-input item-stacked-label" id="personalProfile-input8">
+                <span class="input-label">Address:</span>
+                <input type="text" placeholder="" ng-model="vm.address">
+            </label>
+            <label class="item item-input" id="personalProfile-input9">
+                <span class="input-label">Phone:</span>
+                <input type="tel" placeholder=""  ng-model="vm.phone">
+            </label>
+        </form>
+        <div class="button-bar">
+            <button class="button button-positive button-block" ng-click="Save()">Save</button>
+        </div>
+    </ion-content>
+</ion-view>

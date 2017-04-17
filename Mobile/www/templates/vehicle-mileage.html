@@ -1,0 +1,47 @@
+﻿<ion-view title="Vehicle &amp; Mileage" cache-view="false">
+    <ion-nav-bar align-title="center">
+        <ion-nav-back-button class="button-clear" ng-click="topBackBtn()">
+            <i class="ion-arrow-left-c"></i> Back
+        </ion-nav-back-button>
+
+        <ion-nav-title class="alice_text">
+            Vehicle & Mileage
+        </ion-nav-title>
+    </ion-nav-bar>
+
+    <ion-content class="has-header" padding="true" overflow-scroll="false">
+        <form id="vehicleMileage-form9" class="list">
+            <h5 id="vehicleMileage-heading3" style="color:#000000;">Step 1 of 4</h5>
+            <ion-item id="vehicleMileage-list-item15">
+                Name:
+                <span class="item-note">{{ vm.name }}</span>
+            </ion-item>
+            <label class="item item-select" id="vehicleMileage-select1">
+                <span class="input-label">Vehicle No:</span>
+                <select ng-model="vm.model"
+                        ng-options="item.vehicleNo for item in vm.vehicleInfos track by item.id">
+                </select>
+            </label>
+            <ion-item id="vehicleMileage-list-item16">
+                Model:
+                <span class="item-note">{{ vm.model.model }}</span>
+            </ion-item>
+            <ion-item id="vehicleMileage-list-item17">
+                Last Service KM:
+                <span class="item-note">{{ vm.model.lastServiceKM }}</span>
+            </ion-item>
+            <label class="item item-input" id="vehicleMileage-input10">
+                <span class="input-label">Mileage(KM):</span>
+                <input type="text" placeholder="" ng-model="vm.mileage">
+            </label>
+            <!--<div id="vehicleMileage-button-bar1" class="button-bar">
+                <a ui-sref="app.workshop_timeslot" id="vehicleMileage-button14" class="button button-positive  button-block">Next</a>
+            </div>-->
+            <div class="button-bar">
+                <button class="button button-positive button-block" ng-click="Next()">Next</button>
+            </div>
+        </form>
+    </ion-content>
+
+    
+</ion-view>

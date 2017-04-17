@@ -1,0 +1,45 @@
+﻿<ion-view title="Workshop &amp; Timeslot" cache-view="false">
+    <ion-nav-bar align-title="center">
+        <ion-nav-back-button class="button-clear" ng-click="topBackBtn()">
+            <i class="ion-arrow-left-c"></i> Back
+        </ion-nav-back-button>
+
+        <ion-nav-title class="alice_text">
+            Workshop & Timeslot
+        </ion-nav-title>
+    </ion-nav-bar>
+
+    <ion-content class="has-header" padding="true" overflow-scroll="false">
+        <form id="workshopTimeslot-form15" class="list">
+            <h5 id="workshopTimeslot-heading4" style="color:#000000;">Step 2 of 4</h5>
+            <label class="item item-select" id="workshopTimeslot-select7">
+                <span class="input-label">State:</span>
+                <select ng-model="vm.state"
+                        ng-options="state for state in vm.stateList track by state">
+                    <!--<option ng-repeat="item in vm.vehicleInfos" ng-value="item.id">{{item.vehicleNo}}</option>-->
+                </select>
+            </label>
+            <label class="item item-select" id="workshopTimeslot-select9">
+                <span class="input-label">Workshop:</span>
+                <select ng-model="vm.workshop"
+                        ng-options="workshop.name for workshop in vm.workshops | filter: { state: vm.state } track by workshop.id ">
+                    <!--<option ng-repeat="item in vm.vehicleInfos" ng-value="item.id">{{item.vehicleNo}}</option>-->
+                </select>
+            </label>
+            <ion-item id="workshopTimeslot-list-item19">
+                Telephone:
+                <span class="item-note">{{ vm.workshop.telephone }}</span>
+            </ion-item>
+            <ion-item id="workshopTimeslot-list-item20">
+                Address:
+                <span class="item-note item-text-wrap">{{ vm.workshop.address }}</span>
+            </ion-item>
+
+            <div id="workshopTimeslot-button-bar3" class="button-bar">
+                <a ui-sref="app.vehicle_mileage" id="workshopTimeslot-button19" class="button button-positive  button-block">Back</a>
+                <a ui-sref="app.service_package" id="workshopTimeslot-button20" class="button button-positive  button-block">Next</a>
+            </div>
+            <div id="workshopTimeslot-button-bar2" class="button-bar"></div>
+        </form>
+    </ion-content>
+</ion-view>

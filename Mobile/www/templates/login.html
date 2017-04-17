@@ -1,0 +1,27 @@
+<ion-view cache-view="false">
+    <ion-content overflow-scroll="false" padding="true">
+
+        <br />
+        <div style="text-align:center">
+            <img src="../img/login_logo.jpg" style="display:block;width:90%;height:auto;" />
+        </div>
+        <br />
+
+        <form class="list" name="form">
+            <ion-list>
+                <label class="item item-input">
+                    <span class="input-label label">Username</span>
+                    <input type="text" ng-model="vm.username" required name="username" id="username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label label">Password</span>
+                    <input type="password" ng-model="vm.password" required name="password">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <button class="button button-block button-positive alice_text" ng-click="login()">
+                Log In
+            </button>
+        </form>
+    </ion-content>
+</ion-view>
