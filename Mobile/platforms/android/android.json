@@ -9,6 +9,10 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"DatePickerPlugin\"><param name=\"android-package\" value=\"com.plugin.datepicker.DatePickerPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
@@ -37,6 +41,9 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "io.cordova.kkbook"
         },
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "io.cordova.kkbook"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "io.cordova.kkbook"
         },
@@ -55,6 +62,14 @@
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "id": "cordova-plugin-datepicker.DatePicker",
+            "file": "plugins/cordova-plugin-datepicker/www/android/DatePicker.js",
+            "pluginId": "cordova-plugin-datepicker",
+            "clobbers": [
+                "datePicker"
+            ]
+        },
         {
             "id": "cordova-plugin-device.device",
             "file": "plugins/cordova-plugin-device/www/device.js",
@@ -91,6 +106,7 @@
     ],
     "plugin_metadata": {
         "cordova-plugin-console": "1.0.6",
+        "cordova-plugin-datepicker": "0.9.3",
         "cordova-plugin-device": "1.1.5",
         "cordova-plugin-splashscreen": "3.2.2",
         "cordova-plugin-statusbar": "2.1.3",

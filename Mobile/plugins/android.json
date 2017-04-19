@@ -10,6 +10,9 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "io.cordova.kkbook"
         },
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "io.cordova.kkbook"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "io.cordova.kkbook"
         },

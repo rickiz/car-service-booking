@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('WorkshopTimeslotCtrl', function ($scope, $state, $ionicHistory) {
+.controller('WorkshopTimeslotCtrl', function ($scope, $state, $ionicHistory, $filter) {
     var workshops = app.getWorkshops();
     var stateList = app.stateList;
 
@@ -87,8 +87,63 @@ angular.module('starter.controllers', [])
         workshops: workshops,
         stateList: stateList,
         state: stateList[0],
-        workshop: null
+        workshop: null,
+        bookDate: null,
+        timeslot: "",
+        timeslotList: [],
+        selectedDate: ""
     };
+
+    $scope.onChangeWorkshop = function () {
+        $scope.vm.bookDate = null;
+        $scope.vm.timeslot = "";
+        $scope.vm.selectedDate = "";
+    }
+
+    $scope.selectDate = function () {
+        var today = new Date();
+        var minDate = today.setDate(today.getDate() + 1);
+
+        var options = {
+            date: new Date(),
+            mode: 'date',
+            androidTheme: 4,
+            minDate: (new Date(minDate)).valueOf()
+        };
+
+        function onSuccess(date) {
+            $scope.vm.bookDate = date;
+
+            var selectedDate = moment(date).format('YYYYMMDD');
+            //var selectedDate = "20170427";
+            var selectedWorkshop = $scope.vm.workshop;
+            var timeslotList = app.timeslot;
+            var workShopBookingList = $filter('filter')(selectedWorkshop.booking, { date: selectedDate }, true);
+
+            if (workShopBookingList.length > 0) {
+                var workshopBooking = workShopBookingList[0];
+                var filteredTimeslotList = timeslotList.filter(function (item) {
+                    return workshopBooking.timeslot.indexOf(item) === -1;
+                });
+
+                $scope.vm.timeslotList = filteredTimeslotList;
+            }
+            else {
+                $scope.vm.timeslotList = timeslotList;
+            }
+
+            $scope.vm.selectedDate = selectedDate;
+
+            $scope.$digest();
+        }
+
+        datePicker.show(options, onSuccess);
+    };
+
+    $scope.Next = function () {
+        var vm = $scope.vm;
+        $state.go("app.service_package");
+    }
 
     $scope.topBackBtn = function () {
         $state.go("app.vehicle_mileage");

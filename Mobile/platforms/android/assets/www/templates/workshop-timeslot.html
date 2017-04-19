@@ -12,34 +12,44 @@
     <ion-content class="has-header" padding="true" overflow-scroll="false">
         <form id="workshopTimeslot-form15" class="list">
             <h5 id="workshopTimeslot-heading4" style="color:#000000;">Step 2 of 4</h5>
-            <label class="item item-select" id="workshopTimeslot-select7">
+            <label class="item item-select">
                 <span class="input-label">State:</span>
                 <select ng-model="vm.state"
                         ng-options="state for state in vm.stateList track by state">
                     <!--<option ng-repeat="item in vm.vehicleInfos" ng-value="item.id">{{item.vehicleNo}}</option>-->
                 </select>
             </label>
-            <label class="item item-select" id="workshopTimeslot-select9">
+            <label class="item item-select">
                 <span class="input-label">Workshop:</span>
                 <select ng-model="vm.workshop"
-                        ng-options="workshop.name for workshop in vm.workshops | filter: { state: vm.state } track by workshop.id ">
+                        ng-options="workshop.name for workshop in vm.workshops | filter: { state: vm.state } track by workshop.id "
+                        ng-change="onChangeWorkshop()">
                     <!--<option ng-repeat="item in vm.vehicleInfos" ng-value="item.id">{{item.vehicleNo}}</option>-->
                 </select>
             </label>
-            <ion-item id="workshopTimeslot-list-item19">
+            <ion-item>
                 Telephone:
                 <span class="item-note">{{ vm.workshop.telephone }}</span>
             </ion-item>
-            <ion-item id="workshopTimeslot-list-item20">
+            <ion-item>
                 Address:
                 <span class="item-note item-text-wrap">{{ vm.workshop.address }}</span>
             </ion-item>
+            <ion-item class="item-input item-icon-right" ng-show="vm.workshop != null">
+                <span class="input-label">Booking Date:</span>
+                <input type="date" ng-readonly="true" style="background-color:white" ng-model="vm.bookDate">
+                <i class="icon ion-calendar" ng-click="selectDate()"></i>
+            </ion-item>
+            <label class="item item-select" ng-show="vm.selectedDate != ''">
+                <span class="input-label">Timeslot:</span>
+                <select ng-model="vm.timeslot"
+                        ng-options="timeslot for timeslot in vm.timeslotList track by timeslot ">
+                </select>
+            </label>
 
-            <div id="workshopTimeslot-button-bar3" class="button-bar">
-                <a ui-sref="app.vehicle_mileage" id="workshopTimeslot-button19" class="button button-positive  button-block">Back</a>
-                <a ui-sref="app.service_package" id="workshopTimeslot-button20" class="button button-positive  button-block">Next</a>
+            <div class="button-bar">
+                <button class="button button-positive button-block" ng-click="Next()">Next</button>
             </div>
-            <div id="workshopTimeslot-button-bar2" class="button-bar"></div>
         </form>
     </ion-content>
 </ion-view>
