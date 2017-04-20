@@ -12,29 +12,23 @@
     <ion-content class="has-header" padding="true" overflow-scroll="false">
         <form id="servicePackage-form16" class="list">
             <h5 id="servicePackage-heading5" style="color:#000000;">Step 3 of 4</h5>
-            <label class="item item-select" id="servicePackage-select10">
+            <label class="item item-select">
                 <span class="input-label">Service:</span>
-                <select>
-                    <option>1,000KM</option>
-                    <option>5,000KM</option>
-                    <option>10,000KM</option>
-                    <option>90,000KM</option>
-                    <option>100,000KM</option>
-                </select>
+                <select ng-model="vm.selectedService"
+                        ng-options="item.service for item in vm.servicePackages track by item.id"></select>
             </label>
             <ion-item id="servicePackage-list-item21">
                 Service Item:
-                <span class="item-note">Engine Oil</span>
+                <span class="item-note">{{ vm.selectedService.item }}</span>
             </ion-item>
             <ion-item id="servicePackage-list-item22">
                 Price:
-                <span class="item-note">200</span>
+                <span class="item-note">{{ vm.selectedService.price }}</span>
             </ion-item>
-            <div id="servicePackage-button-bar4" class="button-bar">
-                <a ui-sref="app.workshop_timeslot" id="servicePackage-button22" class="button button-positive  button-block">Back</a>
-                <a ui-sref="app.confirmation" id="servicePackage-button23" class="button button-positive  button-block">Next</a>
+
+            <div class="button-bar">
+                <button class="button button-positive button-block" ng-click="Next()">Next</button>
             </div>
-            <div id="servicePackage-button-bar5" class="button-bar"></div>
         </form>
     </ion-content>
 </ion-view>

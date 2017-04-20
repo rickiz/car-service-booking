@@ -117,6 +117,38 @@ var app = {
             "03:00pm", "03:15pm", "03:30pm", "03:45pm", "04:00pm", "04:15pm", "04:30pm", "04:45pm",
             "05:00pm", "05:15pm", "05:30pm", "05:45pm", "06:00pm", "06:15pm", "06:30pm", "06:45pm",
         ];
+        this.servicePackages = [
+            {
+                id: 1,
+                service: "1,000KM",
+                item: "Engine Oil",
+                price: 200
+            },
+            {
+                id: 2,
+                service: "5,000KM",
+                item: "Engine Oil",
+                price: 300
+            },
+            {
+                id: 3,
+                service: "10,000KM",
+                item: "Engine Oil",
+                price: 600
+            },
+            {
+                id: 4,
+                service: "90,000KM",
+                item: "Engine Oil",
+                price: 800
+            },
+            {
+                id: 5,
+                service: "100,000KM",
+                item: "Engine Oil",
+                price: 1000
+            },
+        ];
     },
 
     bindEvents: function () {
@@ -257,6 +289,36 @@ var app = {
 
     setWorkshops: function (workshops) {
         this.setStorageObj("workshops", workshops);
+    },
+
+    getStep1VM: function () {
+        var vm = this.getStorageObj("step1vm");
+
+        return vm;
+    },
+
+    setStep1VM: function (vm) {
+        this.setStorageObj("step1vm", vm);
+    },
+
+    getStep2VM: function () {
+        var vm = this.getStorageObj("step2vm");
+
+        return vm;
+    },
+
+    setStep2VM: function (vm) {
+        this.setStorageObj("step2vm", vm);
+    },
+
+    getStep3VM: function () {
+        var vm = this.getStorageObj("step3vm");
+
+        return vm;
+    },
+
+    setStep3VM: function (vm) {
+        this.setStorageObj("step3vm", vm);
     },
 };
 

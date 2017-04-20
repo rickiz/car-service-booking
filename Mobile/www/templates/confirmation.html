@@ -12,23 +12,27 @@
     <ion-content class="has-header" padding="true" overflow-scroll="false">
         <form id="confirmation-form17" class="list">
             <h5 id="confirmation-heading6" style="color:#000000;">Step 4 of 4</h5>
-            <ion-list id="confirmation-list4">
-                <ion-item id="confirmation-list-item29">
+            <ion-list>
+                <ion-item>
                     Vehicle No:
-                    <span class="item-note">ABC 1234</span>
+                    <span class="item-note">{{ vm.vehicleNo }}</span>
                 </ion-item>
-                <ion-item id="confirmation-list-item30">
+                <ion-item>
                     Workshop:
-                    <span class="item-note">TCEAS Cheras</span>
+                    <span class="item-note">{{ vm.vehicleNo }}</span>
                 </ion-item>
-                <ion-item id="confirmation-list-item31">Date:</ion-item>
-                <ion-item id="confirmation-list-item32">Time:</ion-item>
+                <ion-item>
+                    Date:
+                    <span class="item-note">{{ vm.date }}</span>
+                </ion-item>
+                <ion-item>
+                    Time:
+                    <span class="item-note">{{ vm.time }}</span>
+                </ion-item>
             </ion-list>
-            <div id="confirmation-button-bar6" class="button-bar">
-                <a ui-sref="app.service_package" id="confirmation-button24" class="button button-positive  button-block">Back</a>
-                <a ui-sref="app.home" id="confirmation-button25" class="button button-positive  button-block">Confirm</a>
+            <div class="button-bar">
+                <button class="button button-positive button-block" ng-click="Confirm()">Confirm</button>
             </div>
-            <div id="confirmation-button-bar7" class="button-bar"></div>
         </form>
     </ion-content>
 </ion-view>

@@ -56,21 +56,35 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HomeCtrl', function ($scope, $state, $ionicHistory) {
+    $scope.Next = function () {
+        app.setStep1VM(null);
+        app.setStep2VM(null);
+        app.setStep3VM(null);
 
+        $state.go("app.vehicle_mileage");
+    }
 })
 
 .controller('VehicleMileageCtrl', function ($scope, $state, $ionicHistory) {
-    var vehicleInfos = app.getVehicleInfos();
+    var vm = app.getStep1VM();
 
-    $scope.vm = {
-        name: app.profile.name,
-        vehicleInfos: vehicleInfos,
-        model: vehicleInfos[0],
-        mileage: ""
-    };
+    if (vm === undefined || vm === null) {
+        var vehicleInfos = app.getVehicleInfos();
+
+        $scope.vm = {
+            name: app.profile.name,
+            vehicleInfos: vehicleInfos,
+            model: vehicleInfos[0],
+            mileage: ""
+        };
+    }
+    else {
+        $scope.vm = vm;
+    }    
 
     $scope.Next = function () {
-        var vm = $scope.vm;
+        app.setStep1VM($scope.vm);
+
         $state.go("app.workshop_timeslot");
     }
 
@@ -82,17 +96,23 @@ angular.module('starter.controllers', [])
 .controller('WorkshopTimeslotCtrl', function ($scope, $state, $ionicHistory, $filter) {
     var workshops = app.getWorkshops();
     var stateList = app.stateList;
+    var vm = app.getStep2VM();
 
-    $scope.vm = {
-        workshops: workshops,
-        stateList: stateList,
-        state: stateList[0],
-        workshop: null,
-        bookDate: null,
-        timeslot: "",
-        timeslotList: [],
-        selectedDate: ""
-    };
+    if (vm === undefined || vm === null) {
+        $scope.vm = {
+            workshops: workshops,
+            stateList: stateList,
+            state: stateList[0],
+            workshop: null,
+            bookDate: null,
+            timeslot: "",
+            timeslotList: [],
+            selectedDate: ""
+        };
+    }
+    else {
+        $scope.vm = vm;
+    }    
 
     $scope.onChangeWorkshop = function () {
         $scope.vm.bookDate = null;
@@ -141,7 +161,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.Next = function () {
-        var vm = $scope.vm;
+        app.setStep2VM($scope.vm);
         $state.go("app.service_package");
     }
 
@@ -150,14 +170,48 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ServicePackageCtrl', function ($scope, $state, $ionicHistory) {
+.controller('ServicePackageCtrl', function ($scope, $state, $ionicHistory) {    
+    var vm = app.getStep3VM();
+
+    if (vm === undefined || vm === null) {
+        var packages = app.servicePackages;
+
+        $scope.vm = {
+            servicePackages: packages,
+            selectedService: packages[0]
+        };
+    }
+    else {
+        $scope.vm = vm;
+    }    
+
+    $scope.Next = function () {
+        app.setStep3VM($scope.vm);
+        $state.go("app.confirmation");
+    }
+
     $scope.topBackBtn = function () {
-        
+        $state.go("app.workshop_timeslot");
     }
 })
 
 .controller('ConfirmationCtrl', function ($scope, $state, $ionicHistory) {
+    $scope.vm = {
+        vehicleNo: "",
+        workshop: "",
+        date: "",
+        time: ""
+    };
+
+    $scope.Confirm = function () {
+        var vm = $scope.vm;
+
+
+
+        $state.go("app.home");
+    }
+
     $scope.topBackBtn = function () {
-        
+        $state.go("app.service_package");
     }
 })
