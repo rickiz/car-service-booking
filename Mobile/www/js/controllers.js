@@ -112,6 +112,10 @@ angular.module('starter.controllers', [])
     }
     else {
         $scope.vm = vm;
+
+        var selectedDate = moment(vm.selectedDate, "YYYYMMDD").toDate();
+
+        $scope.vm.bookDate = selectedDate;
     }    
 
     $scope.onChangeWorkshop = function () {
@@ -196,17 +200,19 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ConfirmationCtrl', function ($scope, $state, $ionicHistory) {
+    var vm1 = app.getStep1VM();
+    var vm2 = app.getStep2VM();
+    var selectedDate = moment(vm2.selectedDate, "YYYYMMDD").format("MM/DD/YYYY");
+
     $scope.vm = {
-        vehicleNo: "",
-        workshop: "",
-        date: "",
-        time: ""
+        vehicleNo: vm1.model.vehicleNo,
+        workshop: vm2.workshop.name,
+        date: selectedDate,
+        time: vm2.timeslot
     };
 
     $scope.Confirm = function () {
         var vm = $scope.vm;
-
-
 
         $state.go("app.home");
     }
