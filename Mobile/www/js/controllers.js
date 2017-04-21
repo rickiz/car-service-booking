@@ -51,11 +51,28 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('HistoryCtrl', function ($scope, $state) {
+.controller('HistoryCtrl', function ($scope, $state, $filter) {
+    var historyList = app.getServiceHistory();
+    var vehicleInfos = app.getVehicleInfos();
 
+    $scope.vm = {
+        historyList: historyList,
+        vehicleInfos: vehicleInfos,
+        vehicle: null,
+        history:null
+    }
+
+    //$scope.onChangeVehicle() = function () {
+    //    //var list = $filter('filter')(historyList, { vehicleInfo.id: $scope.vm.vehicleId }, true)[0];
+    //    $scope.vm.historyList = list;
+    //}
 })
 
 .controller('HomeCtrl', function ($scope, $state, $ionicHistory) {
+    $scope.vm = {
+        
+    };
+
     $scope.Next = function () {
         app.setStep1VM(null);
         app.setStep2VM(null);
@@ -199,7 +216,7 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ConfirmationCtrl', function ($scope, $state, $ionicHistory) {
+.controller('ConfirmationCtrl', function ($scope, $state, $ionicHistory, $filter) {
     var vm1 = app.getStep1VM();
     var vm2 = app.getStep2VM();
     var selectedDate = moment(vm2.selectedDate, "YYYYMMDD").format("MM/DD/YYYY");
@@ -212,7 +229,46 @@ angular.module('starter.controllers', [])
     };
 
     $scope.Confirm = function () {
-        var vm = $scope.vm;
+        var serviceHistory = app.getServiceHistory();
+        var vehicleInfos = app.getVehicleInfos();
+        var vm3 = app.getStep3VM();
+
+        var newService = {
+            vehicleInfo: vm1.model,
+            mileage: vm1.mileage,
+            selectedDate: vm2.selectedDate,
+            formatedSelectedDate: selectedDate,
+            workshop: vm2.workshop,
+            selectedService: vm3.selectedService,
+            timeslot: vm2.timeslot,
+            invoice: "KUL-" + (Math.floor(Math.random()*90000) + 10000)
+        };
+
+        serviceHistory.push(newService);
+
+        // Update Workshop List
+        var workshops = app.getWorkshops();
+        var workshop = $filter('filter')(workshops, { id: vm2.workshop.id }, true)[0];
+        var bookings = $filter('filter')(workshop.booking, { date: vm2.selectedDate });
+
+        if (bookings.length > 0) {
+            var booking = bookings[0];
+            booking.timeslot.push(vm2.timeslot);
+        }
+        else {
+            var newBooking = {
+                date: vm2.selectedDate, timeslot: [vm2.timeslot]
+            }
+            workshop.booking.push(newBooking);
+        }
+
+        // Update VehicleInfos
+        var vehicle = $filter('filter')(vehicleInfos, { id: vm1.model.id }, true)[0];
+        vehicle.lastServiceKM = vm1.mileage;
+
+        app.setVehicleInfos(vehicleInfos);
+        app.setWorkshops(workshops);
+        app.setServiceHistory(serviceHistory);
 
         $state.go("app.home");
     }

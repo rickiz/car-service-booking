@@ -1,40 +1,38 @@
 ﻿<ion-view title="Service History" cache-view="false">
     <ion-content class="has-header" padding="true" overflow-scroll="false">
-        <form id="serviceHistory-form10" class="list">
-            <label class="item item-select" id="serviceHistory-select3">
+        <form class="list">
+            <label class="item item-select">
                 <span class="input-label">Vehicle No :</span>
-                <select>
-                    <option>ABC 1234</option>
+                <select ng-model="vm.vehicle"
+                        ng-options="item.vehicleNo for item in vm.vehicleInfos track by item.id">
                 </select>
             </label>
         </form>
-        <form id="serviceHistory-form11" class="list">
+        <form class="list">
             <label class="item item-select" id="serviceHistory-select4">
                 <span class="input-label">Service Date :</span>
-                <select>
-                    <option>04-Jan-2015</option>
-                    <option>04-July-2015</option>
-                    <option>04-Jan-2016</option>
+                <select ng-model="vm.history" 
+                        ng-options="history.formatedSelectedDate for history in vm.historyList | filter: { vehicleInfo: { id: vm.vehicle.id } } track by history.selectedDate">
                 </select>
             </label>
         </form>
-        <h3 id="serviceHistory-heading1" style="color:#000000;">Details:</h3>
-        <ion-list id="serviceHistory-list2">
-            <ion-item id="serviceHistory-list-item4">
+        <h3 style="color:#000000;">Details:</h3>
+        <ion-list>
+            <ion-item>
                 Invoice
-                <span class="item-note">KUL-144686 </span>
+                <span class="item-note">{{ vm.history.invoice }}</span>
             </ion-item>
-            <ion-item id="serviceHistory-list-item5">
+            <ion-item>
                 Branch
-                <span class="item-note">Jalan Ipoh</span>
+                <span class="item-note">{{ vm.history.workshop.name }}</span>
             </ion-item>
-            <ion-item id="serviceHistory-list-item6">
+            <ion-item>
                 Mileage(KM)
-                <span class="item-note">260</span>
+                <span class="item-note">{{ vm.history.mileage }}</span>
             </ion-item>
-            <ion-item id="serviceHistory-list-item8">
+            <ion-item>
                 Amt Payable(RM)
-                <span class="item-note">90</span>
+                <span class="item-note">{{ vm.history.selectedService.price }}</span>
             </ion-item>
         </ion-list>
     </ion-content>

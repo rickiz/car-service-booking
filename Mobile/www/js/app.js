@@ -320,6 +320,20 @@ var app = {
     setStep3VM: function (vm) {
         this.setStorageObj("step3vm", vm);
     },
+
+    getServiceHistory: function () {
+        var serviceHistory = this.getStorageObj("serviceHistory");
+
+        if (serviceHistory === undefined || serviceHistory === null) {
+            serviceHistory = [];
+        }
+
+        return serviceHistory;
+    },
+
+    setServiceHistory: function (vm) {
+        this.setStorageObj("serviceHistory", vm);
+    },
 };
 
 app.initialize();
