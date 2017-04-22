@@ -1,18 +1,18 @@
 ﻿<ion-view title="Appointment"  cache-view="false">
     <ion-content class="has-header" padding="true" overflow-scroll="false">
-        <form id="appointment-form18" class="list">
-            <h5 id="appointment-heading7" style="color:#000000;">Your Upcoming Appoinment:</h5>
-            <ion-item id="appointment-list-item33">
+        <form class="list">
+            <h5 style="color:#000000;">Your Upcoming Appoinment:</h5>
+            <ion-item>
                 Date:
-                <span class="item-note">12 May 2017</span>
+                <span class="item-note"> {{ vm.date }}</span>
             </ion-item>
-            <ion-item id="appointment-list-item34">
+            <ion-item>
                 Location:
-                <span class="item-note">TCEAS Cheras</span>
+                <span class="item-note">{{ vm.workshop.name }}</span>
             </ion-item>
-            <ion-item id="appointment-list-item36">
+            <ion-item>
                 Vehicle No:
-                <span class="item-note">ABC 1234</span>
+                <span class="item-note">{{ vm.vehicleNo }}</span>
             </ion-item>
             <div class="button-bar">
                 <button class="button button-positive button-block" ng-click="Next()">Make Appoinment</button>

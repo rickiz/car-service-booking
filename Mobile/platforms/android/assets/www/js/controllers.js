@@ -68,10 +68,37 @@ angular.module('starter.controllers', [])
     //}
 })
 
-.controller('HomeCtrl', function ($scope, $state, $ionicHistory) {
-    $scope.vm = {
+.controller('HomeCtrl', function ($scope, $state, $ionicHistory, $filter) {
+    var historyList = app.getServiceHistory();
+    var upcomingServiceList = [];
+    var now = new Date();
+    var upcomingSelectedDate = "";
+
+    angular.forEach(historyList, function (history, key) {
+        var selectedDate = moment(history.selectedDate, "YYYYMMDD").toDate();
+
+        if (selectedDate > now) {
+            upcomingServiceList.push(history);
+
+            if (upcomingSelectedDate === "") {
+                upcomingSelectedDate = history.selectedDate;
+            }
+            else if (parseInt(history.selectedDate) < parseInt(upcomingSelectedDate)) {
+                upcomingSelectedDate = history.selectedDate;
+            }
+        }
+    });
+    upcomingServiceList = $filter('filter')(upcomingServiceList, { selectedDate: upcomingSelectedDate });
+
+    if (upcomingServiceList.length > 0) {
+        var service = upcomingServiceList[0];
         
-    };
+        $scope.vm = {
+            date: moment(service.selectedDate, "YYYYMMDD").format("DD MMM YYYY"),
+            workshop: service.workshop,
+            vehicleNo: service.vehicleInfo.vehicleNo
+        };
+    }
 
     $scope.Next = function () {
         app.setStep1VM(null);
