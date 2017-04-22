@@ -201,8 +201,8 @@ var app = {
             profile = {
                 name: "Stephen Chow",
                 email: "stephenchow@hotmail.com",
-                address: "",
-                phone: ""
+                address: "B-1-1, Apartment Satu, 52000 KL",
+                phone: "60124445556"
             };
 
             this.setProfile(profile);
@@ -228,7 +228,7 @@ var app = {
                 {
                     id: 2,
                     vehicleNo: "WAA1001",
-                    model: "HONDA CITY 1.5V",
+                    model: "TEANA 2.0 xL",
                     lastServiceKM: 1500
                 }];
 

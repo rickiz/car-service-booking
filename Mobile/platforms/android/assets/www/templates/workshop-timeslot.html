@@ -48,7 +48,7 @@
             </label>
 
             <div class="button-bar">
-                <button class="button button-positive button-block" ng-click="Next()">Next</button>
+                <button class="button button-positive button-block" ng-click="Next()" ng-disabled="vm.timeslot === ''">Next</button>
             </div>
         </form>
     </ion-content>

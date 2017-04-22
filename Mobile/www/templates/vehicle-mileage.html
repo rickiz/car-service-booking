@@ -32,13 +32,13 @@
             </ion-item>
             <label class="item item-input" id="vehicleMileage-input10">
                 <span class="input-label">Mileage(KM):</span>
-                <input type="text" placeholder="" ng-model="vm.mileage">
+                <input type="number" placeholder="" ng-model="vm.mileage">
             </label>
             <!--<div id="vehicleMileage-button-bar1" class="button-bar">
                 <a ui-sref="app.workshop_timeslot" id="vehicleMileage-button14" class="button button-positive  button-block">Next</a>
             </div>-->
             <div class="button-bar">
-                <button class="button button-positive button-block" ng-click="Next()">Next</button>
+                <button class="button button-positive button-block" ng-click="Next()" ng-disabled="!(vm.mileage > 0)">Next</button>
             </div>
         </form>
     </ion-content>
